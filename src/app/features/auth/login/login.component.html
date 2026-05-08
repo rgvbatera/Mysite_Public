@@ -1,0 +1,55 @@
+<div class="login-container">
+  <div class="login-card">
+    <div class="logo-section">
+      <h1>BateraDev</h1>
+      <p>Entre na comunidade</p>
+    </div>
+
+    <form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
+      <div class="form-group">
+        <label for="email">Email</label>
+        <input
+          type="email"
+          id="email"
+          formControlName="email"
+          class="form-control"
+          [class.is-invalid]="submitted && f['email'].errors"
+          placeholder="seu@email.com"
+        />
+        <div class="invalid-feedback" *ngIf="submitted && f['email'].errors">
+          <div *ngIf="f['email'].errors['required']">Email é obrigatório</div>
+          <div *ngIf="f['email'].errors['email']">Email inválido</div>
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label for="password">Senha</label>
+        <input
+          type="password"
+          id="password"
+          formControlName="password"
+          class="form-control"
+          [class.is-invalid]="submitted && f['password'].errors"
+          placeholder="Sua senha"
+        />
+        <div class="invalid-feedback" *ngIf="submitted && f['password'].errors">
+          <div *ngIf="f['password'].errors['required']">Senha é obrigatória</div>
+          <div *ngIf="f['password'].errors['minlength']">Senha deve ter no mínimo 6 caracteres</div>
+        </div>
+      </div>
+
+      <div class="error-message" *ngIf="errorMessage">
+        {{ errorMessage }}
+      </div>
+
+      <button type="submit" class="btn btn-primary btn-block" [disabled]="loading">
+        <span *ngIf="loading" class="spinner"></span>
+        {{ loading ? 'Entrando...' : 'Entrar' }}
+      </button>
+    </form>
+
+    <div class="register-link">
+      <p>Não tem uma conta? <a (click)="goToRegister()">Cadastre-se</a></p>
+    </div>
+  </div>
+</div>

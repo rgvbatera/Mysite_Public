@@ -1,0 +1,74 @@
+<header class="header">
+  <nav class="navbar">
+    <div class="nav-brand">
+      <a routerLink="/" class="logo">
+        <span class="logo-code">Batera</span><span class="logo-beat">Dev</span>
+      </a>
+    </div>
+    
+    <button class="mobile-menu-btn" (click)="toggleMenu()">
+      <span class="hamburger"></span>
+      <span class="hamburger"></span>
+      <span class="hamburger"></span>
+    </button>
+
+    <ul class="nav-menu" [class.active]="menuOpen">
+      <li><a routerLink="/" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}" (click)="closeMenu()">🏠 Home</a></li>
+      <li><a routerLink="/noticias" routerLinkActive="active" (click)="closeMenu()">📰 Notícias</a></li>
+      <li class="dropdown" [class.open]="activeDropdown === 'categorias'">
+        <a class="dropdown-toggle" (click)="toggleDropdown('categorias', $event)">📂 Categorias</a>
+        <ul class="dropdown-menu">
+          <li><a routerLink="/categoria/programacao" routerLinkActive="active" (click)="closeMenu()">💻 Programação</a></li>
+          <li><a routerLink="/categoria/jogos" routerLinkActive="active" (click)="closeMenu()">🎮 Jogos & Mods</a></li>
+          <li><a routerLink="/categoria/bateria" routerLinkActive="active" (click)="closeMenu()">🥁 Bateria</a></li>
+        </ul>
+      </li>
+      <li><a routerLink="/feed" routerLinkActive="active" (click)="closeMenu()">🌟 Feed Social</a></li>
+      <li class="dropdown" [class.open]="activeDropdown === 'redes'">
+        <a class="dropdown-toggle" (click)="toggleDropdown('redes', $event)">📱 Redes Sociais</a>
+        <ul class="dropdown-menu">
+          <li><a href="https://www.linkedin.com/in/renan-vanderce/" target="_blank" rel="noopener" (click)="closeMenu()">💼 LinkedIn</a></li>
+          <li><a href="https://github.com/rgvbatera" target="_blank" rel="noopener" (click)="closeMenu()">🐙 GitHub</a></li>
+          <li><a href="https://www.instagram.com/renan.gvanderce/" target="_blank" rel="noopener" (click)="closeMenu()">📸 Instagram</a></li>
+          <li><a class="disabled">🎬 YouTube (Em breve)</a></li>
+        </ul>
+      </li>
+      <li *ngIf="isAuthenticated"><a routerLink="/portfolio" routerLinkActive="active" (click)="closeMenu()">💼 Portfolio</a></li>
+      <li *ngIf="isAuthenticated"><a routerLink="/profile" routerLinkActive="active" (click)="closeMenu()">👤 Perfil <span *ngIf="isAdmin" class="admin-badge">ADMIN</span></a></li>
+      <li *ngIf="!isAuthenticated"><a routerLink="/login" routerLinkActive="active" class="btn-login" (click)="closeMenu()">🔐 Entrar</a></li>
+      <li *ngIf="isAuthenticated"><a (click)="logout()" class="btn-logout">🚪 Sair</a></li>
+    </ul>
+  </nav>
+</header>
+
+<main class="main-content">
+  <router-outlet></router-outlet>
+</main>
+
+<footer class="footer">
+  <div class="footer-content">
+    <div class="footer-section">
+      <h3>BateraDev</h3>
+      <p>Programação, jogos e bateria - tudo em um só lugar.</p>
+    </div>
+    <div class="footer-section">
+      <h4>Categorias</h4>
+      <ul>
+        <li><a routerLink="/categoria/programacao">Programação</a></li>
+        <li><a routerLink="/categoria/jogos">Jogos & Mods</a></li>
+        <li><a routerLink="/categoria/bateria">Bateria</a></li>
+      </ul>
+    </div>
+    <div class="footer-section">
+      <h4>Redes Sociais</h4>
+      <ul>
+        <li><a href="https://www.linkedin.com/in/renan-vanderce/" target="_blank" rel="noopener">💼 LinkedIn</a></li>
+        <li><a href="https://github.com/rgvbatera" target="_blank" rel="noopener">🐙 GitHub</a></li>
+        <li><a href="https://www.instagram.com/renan.gvanderce/" target="_blank" rel="noopener">📸 Instagram</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <p>&copy; 2025 BateraDev - Renan Vanderce</p>
+  </div>
+</footer>

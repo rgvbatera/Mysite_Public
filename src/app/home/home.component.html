@@ -1,0 +1,57 @@
+<div class="home-container">
+  <!-- Matrix Background -->
+  <canvas #matrixCanvas class="matrix-canvas"></canvas>
+
+  <!-- Main Content -->
+  <div class="content-wrapper">
+    <!-- Hero Section -->
+    <section class="hero">
+      <div class="hero-content">
+        <h1 class="hero-title">
+          <span class="glitch-text" data-text="BateraDev">BateraDev</span>
+        </h1>
+        <p class="hero-subtitle typing-effect">
+          Desenvolvedor | Baterista | Gamer
+        </p>
+        <div class="code-badge">
+          <span class="bracket">&lt;</span>
+          <span class="tag">code</span>
+          <span class="bracket">&gt;</span>
+          <span class="content-text">while(alive) &#123; eat(); sleep(); code(); drum(); &#125;</span>
+          <span class="bracket">&lt;/</span>
+          <span class="tag">code</span>
+          <span class="bracket">&gt;</span>
+        </div>
+      </div>
+    </section>
+
+    <!-- Categories Section -->
+    <section class="categories-section">
+      <h2 class="section-title neon-text">Explore</h2>
+      <div class="categories-grid">
+        <a *ngFor="let category of categories" [routerLink]="category.route" class="category-card cyber-card">
+          <div class="category-icon">{{ category.icon }}</div>
+          <h3>{{ category.name }}</h3>
+          <p>{{ category.description }}</p>
+          <span class="category-arrow">→</span>
+        </a>
+      </div>
+    </section>
+
+    <!-- CTA Section -->
+    <section class="cta-section">
+      <div class="cta-content cyber-border">
+        <h2 class="neon-text">Pronto para Explorar?</h2>
+        <p>Confira meus projetos no GitHub e tutoriais sobre desenvolvimento.</p>
+        <div class="cta-buttons">
+          <a href="https://github.com/rgvbatera" target="_blank" class="btn btn-primary cyber-btn">
+            <span class="btn-icon">⚡</span> GitHub
+          </a>
+          <a routerLink="/noticias" class="btn btn-secondary cyber-btn">
+            <span class="btn-icon">📰</span> Artigos
+          </a>
+        </div>
+      </div>
+    </section>
+  </div>
+</div>

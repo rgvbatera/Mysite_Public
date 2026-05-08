@@ -1,0 +1,600 @@
+.home-container {
+  width: 100%;
+  min-height: 100vh;
+  background: #190032;
+  position: relative;
+  overflow-x: hidden;
+}
+
+/* Matrix Canvas */
+.matrix-canvas {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 0;
+  pointer-events: none;
+}
+
+/* Content Wrapper */
+.content-wrapper {
+  position: relative;
+  z-index: 1;
+}
+
+/* Hero Section */
+.hero {
+  min-height: 60vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding: 80px 20px;
+}
+
+.hero-content {
+  max-width: 900px;
+}
+
+.hero-title {
+  font-size: 80px;
+  font-weight: 900;
+  margin: 0 0 20px 0;
+  line-height: 1;
+}
+
+/* Glitch Effect */
+.glitch-text {
+  position: relative;
+  color: #0f0;
+  text-shadow: 
+    0 0 10px #0f0,
+    0 0 20px #0f0,
+    0 0 40px #0f0,
+    0 0 80px #0f0;
+  animation: glitch 2s infinite;
+}
+
+.glitch-text::before,
+.glitch-text::after {
+  content: attr(data-text);
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+}
+
+.glitch-text::before {
+  color: #9b30ff;
+  animation: glitch-1 0.3s infinite;
+  clip-path: polygon(0 0, 100% 0, 100% 35%, 0 35%);
+  transform: translateX(-2px);
+}
+
+.glitch-text::after {
+  color: #7b1fa2;
+  animation: glitch-2 0.3s infinite;
+  clip-path: polygon(0 65%, 100% 65%, 100% 100%, 0 100%);
+  transform: translateX(2px);
+}
+
+@keyframes glitch {
+  0%, 90%, 100% { opacity: 1; }
+  92% { opacity: 0.8; transform: skewX(-2deg); }
+  94% { opacity: 1; transform: skewX(0deg); }
+}
+
+@keyframes glitch-1 {
+  0%, 100% { transform: translateX(-2px); }
+  50% { transform: translateX(2px); }
+}
+
+@keyframes glitch-2 {
+  0%, 100% { transform: translateX(2px); }
+  50% { transform: translateX(-2px); }
+}
+
+.hero-subtitle {
+  font-size: 24px;
+  color: #0f0;
+  opacity: 0.8;
+  margin-bottom: 30px;
+  font-family: 'Courier New', monospace;
+}
+
+.typing-effect {
+  overflow: hidden;
+  border-right: 3px solid #0f0;
+  white-space: nowrap;
+  animation: typing 3s steps(30) infinite, blink 0.7s infinite;
+  display: inline-block;
+}
+
+@keyframes typing {
+  0%, 100% { width: 0; }
+  50%, 90% { width: 100%; }
+}
+
+@keyframes blink {
+  50% { border-color: transparent; }
+}
+
+/* Code Badge */
+.code-badge {
+  display: inline-block;
+  background: rgba(0, 255, 0, 0.1);
+  border: 1px solid #0f0;
+  padding: 15px 25px;
+  border-radius: 8px;
+  font-family: 'Courier New', monospace;
+  font-size: 14px;
+}
+
+.code-badge .bracket {
+  color: #888;
+}
+
+.code-badge .tag {
+  color: #9b30ff;
+}
+
+.code-badge .content-text {
+  color: #0f0;
+}
+
+/* Neon Text */
+.neon-text {
+  color: #0f0;
+  text-shadow: 
+    0 0 5px #0f0,
+    0 0 10px #0f0,
+    0 0 20px #0f0;
+}
+
+/* Drum Kit Section */
+.drumkit-section {
+  padding: 60px 20px;
+  text-align: center;
+}
+
+.section-title {
+  font-size: 36px;
+  font-weight: 700;
+  margin-bottom: 20px;
+}
+
+.drumkit-instruction {
+  color: #888;
+  margin-bottom: 40px;
+  font-size: 16px;
+}
+
+.drumkit-container {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  grid-template-rows: repeat(3, auto);
+  gap: 20px;
+  max-width: 900px;
+  margin: 0 auto;
+  padding: 20px;
+}
+
+/* Drum Piece Base */
+.drum-piece {
+  background: rgba(75, 0, 130, 0.2);
+  border: 2px solid #0f0;
+  border-radius: 12px;
+  padding: 20px;
+  cursor: pointer;
+  transition: all 0.1s ease;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+  user-select: none;
+}
+
+.drum-piece:hover {
+  background: rgba(75, 0, 130, 0.4);
+  transform: scale(1.02);
+  box-shadow: 0 0 20px rgba(0, 255, 0, 0.3);
+}
+
+.drum-piece.playing {
+  background: rgba(0, 255, 0, 0.3);
+  transform: scale(0.95);
+  box-shadow: 
+    0 0 30px #0f0,
+    inset 0 0 20px rgba(0, 255, 0, 0.3);
+}
+
+.drum-label {
+  color: #fff;
+  font-weight: 600;
+  font-size: 14px;
+}
+
+.drum-key {
+  background: #0f0;
+  color: #000;
+  padding: 4px 12px;
+  border-radius: 4px;
+  font-size: 12px;
+  font-weight: 700;
+  font-family: 'Courier New', monospace;
+}
+
+/* Drum Visuals */
+.drum-visual {
+  width: 80px;
+  height: 80px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+}
+
+/* Cymbals */
+.cymbal {
+  width: 60px;
+  height: 8px;
+  background: linear-gradient(to bottom, #ffd700, #b8860b, #ffd700);
+  border-radius: 50%;
+  box-shadow: 0 2px 10px rgba(255, 215, 0, 0.5);
+}
+
+.crash-cymbal {
+  width: 70px;
+  height: 10px;
+}
+
+.ride-cymbal {
+  width: 80px;
+  height: 12px;
+}
+
+.stand {
+  position: absolute;
+  bottom: 0;
+  width: 4px;
+  height: 40px;
+  background: linear-gradient(to bottom, #888, #444);
+  border-radius: 2px;
+}
+
+/* Toms */
+.tom {
+  width: 60px;
+  height: 40px;
+  background: linear-gradient(to bottom, #2d1b4e, #1a0a2e);
+  border: 3px solid #4b0082;
+  border-radius: 50%;
+  box-shadow: 
+    inset 0 -10px 20px rgba(0, 0, 0, 0.5),
+    0 5px 15px rgba(0, 0, 0, 0.5);
+}
+
+.tom-medium {
+  width: 65px;
+  height: 45px;
+}
+
+.tom.floor {
+  width: 80px;
+  height: 55px;
+}
+
+/* Snare */
+.snare-drum {
+  width: 70px;
+  height: 35px;
+  background: linear-gradient(to bottom, #2d2d2d, #1a1a1a);
+  border: 4px solid #444;
+  border-radius: 50%;
+  box-shadow: 
+    inset 0 -8px 15px rgba(0, 0, 0, 0.5),
+    0 5px 15px rgba(0, 0, 0, 0.5);
+  position: relative;
+}
+
+.snare-drum::after {
+  content: '';
+  position: absolute;
+  bottom: -5px;
+  left: 10%;
+  width: 80%;
+  height: 3px;
+  background: repeating-linear-gradient(
+    90deg,
+    #888,
+    #888 2px,
+    transparent 2px,
+    transparent 6px
+  );
+}
+
+/* Kick Drum */
+.kick-drum {
+  width: 100px;
+  height: 100px;
+  background: radial-gradient(circle, #2d1b4e 0%, #0a0515 100%);
+  border: 6px solid #4b0082;
+  border-radius: 50%;
+  box-shadow: 
+    inset 0 0 30px rgba(0, 0, 0, 0.8),
+    0 10px 30px rgba(0, 0, 0, 0.5);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.kick-logo {
+  color: #0f0;
+  font-weight: 900;
+  font-size: 24px;
+  text-shadow: 0 0 10px #0f0;
+}
+
+/* Grid Positioning */
+.hihat { grid-column: 1; grid-row: 1; }
+.crash { grid-column: 2; grid-row: 1; }
+.ride { grid-column: 4; grid-row: 1; }
+.tom1 { grid-column: 2; grid-row: 2; }
+.tom2 { grid-column: 3; grid-row: 2; }
+.snare { grid-column: 1; grid-row: 2; }
+.floor-tom { grid-column: 4; grid-row: 2; }
+.kick { 
+  grid-column: 2 / 4; 
+  grid-row: 3;
+}
+
+.kick .drum-visual {
+  width: 120px;
+  height: 120px;
+}
+
+/* Categories Section */
+.categories-section {
+  padding: 60px 20px;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.categories-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 30px;
+  margin-top: 40px;
+}
+
+.category-card {
+  background: rgba(75, 0, 130, 0.3);
+  border: 1px solid #0f0;
+  border-radius: 16px;
+  padding: 40px 30px;
+  text-align: center;
+  text-decoration: none;
+  transition: all 0.3s;
+  position: relative;
+  overflow: hidden;
+}
+
+.category-card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(0, 255, 0, 0.1), transparent);
+  transition: left 0.5s;
+}
+
+.category-card:hover::before {
+  left: 100%;
+}
+
+.category-card:hover {
+  transform: translateY(-10px);
+  box-shadow: 
+    0 0 30px rgba(0, 255, 0, 0.3),
+    0 20px 40px rgba(0, 0, 0, 0.5);
+  border-color: #0f0;
+}
+
+.category-icon {
+  font-size: 64px;
+  margin-bottom: 20px;
+}
+
+.category-card h3 {
+  font-size: 24px;
+  margin-bottom: 10px;
+  color: #0f0;
+}
+
+.category-card p {
+  color: #888;
+  margin-bottom: 20px;
+  line-height: 1.6;
+}
+
+.category-arrow {
+  color: #0f0;
+  font-size: 24px;
+  font-weight: 700;
+  transition: transform 0.3s;
+}
+
+.category-card:hover .category-arrow {
+  transform: translateX(10px);
+}
+
+/* CTA Section */
+.cta-section {
+  padding: 80px 20px;
+  text-align: center;
+}
+
+.cta-content {
+  max-width: 600px;
+  margin: 0 auto;
+  padding: 50px;
+  background: rgba(75, 0, 130, 0.3);
+  border: 2px solid #0f0;
+  border-radius: 20px;
+  position: relative;
+}
+
+.cyber-border::before {
+  content: '';
+  position: absolute;
+  top: -2px;
+  left: -2px;
+  right: -2px;
+  bottom: -2px;
+  background: linear-gradient(45deg, #0f0, #9b30ff, #7b1fa2, #0f0);
+  border-radius: 22px;
+  z-index: -1;
+  animation: border-rotate 3s linear infinite;
+  opacity: 0.5;
+}
+
+@keyframes border-rotate {
+  0% { filter: hue-rotate(0deg); }
+  100% { filter: hue-rotate(360deg); }
+}
+
+.cta-content h2 {
+  font-size: 32px;
+  margin-bottom: 15px;
+}
+
+.cta-content p {
+  color: #888;
+  margin-bottom: 30px;
+  font-size: 18px;
+}
+
+.cta-buttons {
+  display: flex;
+  gap: 20px;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+.btn {
+  padding: 15px 30px;
+  border-radius: 8px;
+  font-weight: 600;
+  text-decoration: none;
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  transition: all 0.3s;
+  font-size: 16px;
+}
+
+.btn-primary {
+  background: #0f0;
+  color: #000;
+}
+
+.btn-primary:hover {
+  box-shadow: 0 0 30px #0f0;
+  transform: translateY(-3px);
+}
+
+.btn-secondary {
+  background: transparent;
+  color: #0f0;
+  border: 2px solid #0f0;
+}
+
+.btn-secondary:hover {
+  background: rgba(0, 255, 0, 0.1);
+  box-shadow: 0 0 20px rgba(0, 255, 0, 0.3);
+  transform: translateY(-3px);
+}
+
+.btn-icon {
+  font-size: 20px;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .hero-title {
+    font-size: 48px;
+  }
+  
+  .hero-subtitle {
+    font-size: 18px;
+  }
+  
+  .drumkit-container {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 15px;
+  }
+  
+  .hihat { grid-column: 1; grid-row: 1; }
+  .crash { grid-column: 2; grid-row: 1; }
+  .ride { grid-column: 1; grid-row: 2; }
+  .tom1 { grid-column: 2; grid-row: 2; }
+  .tom2 { grid-column: 1; grid-row: 3; }
+  .snare { grid-column: 2; grid-row: 3; }
+  .floor-tom { grid-column: 1; grid-row: 4; }
+  .kick { 
+    grid-column: 1 / 3; 
+    grid-row: 5;
+  }
+  
+  .drum-piece {
+    padding: 15px;
+  }
+  
+  .drum-visual {
+    width: 60px;
+    height: 60px;
+  }
+  
+  .kick .drum-visual {
+    width: 80px;
+    height: 80px;
+  }
+  
+  .kick-drum {
+    width: 70px;
+    height: 70px;
+  }
+  
+  .kick-logo {
+    font-size: 18px;
+  }
+  
+  .code-badge {
+    font-size: 11px;
+    padding: 10px 15px;
+  }
+  
+  .section-title {
+    font-size: 28px;
+  }
+  
+  .cta-content {
+    padding: 30px 20px;
+  }
+}
+
+@media (max-width: 480px) {
+  .hero-title {
+    font-size: 36px;
+  }
+  
+  .typing-effect {
+    white-space: normal;
+    border-right: none;
+    animation: none;
+  }
+}

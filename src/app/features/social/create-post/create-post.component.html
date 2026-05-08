@@ -1,0 +1,113 @@
+<div class="create-post-card">
+  <div class="card-header">
+    <h2>✨ Criar Novo Post</h2>
+  </div>
+
+  <form [formGroup]="postForm" (ngSubmit)="onSubmit()">
+    <!-- Title -->
+    <div class="form-group">
+      <label for="title">Título</label>
+      <input
+        type="text"
+        id="title"
+        formControlName="title"
+        class="form-control"
+        [class.is-invalid]="submitted && f['title'].errors"
+        placeholder="Digite um título chamativo..."
+      />
+      <div class="char-counter">
+        {{ getCharCount('title') }}/{{ getMaxLength('title') }}
+      </div>
+      <div class="invalid-feedback" *ngIf="submitted && f['title'].errors">
+        <div *ngIf="f['title'].errors['required']">Título é obrigatório</div>
+        <div *ngIf="f['title'].errors['minlength']">Mínimo de 3 caracteres</div>
+        <div *ngIf="f['title'].errors['maxlength']">Máximo de 200 caracteres</div>
+      </div>
+    </div>
+
+    <!-- Category -->
+    <div class="form-group">
+      <label>Categoria</label>
+      <div class="category-selector">
+        <label
+          *ngFor="let cat of categories"
+          class="category-option"
+          [class.selected]="f['category'].value === cat.value"
+        >
+          <input
+            type="radio"
+            formControlName="category"
+            [value]="cat.value"
+            hidden
+          />
+          <span class="category-icon">{{ cat.icon }}</span>
+          <span class="category-name">{{ cat.label }}</span>
+        </label>
+      </div>
+    </div>
+
+    <!-- Content -->
+    <div class="form-group">
+      <label for="content">Conteúdo</label>
+      <textarea
+        id="content"
+        formControlName="content"
+        class="form-control textarea"
+        [class.is-invalid]="submitted && f['content'].errors"
+        placeholder="Compartilhe seus pensamentos..."
+        rows="6"
+      ></textarea>
+      <div class="char-counter">
+        {{ getCharCount('content') }} caracteres
+      </div>
+      <div class="invalid-feedback" *ngIf="submitted && f['content'].errors">
+        <div *ngIf="f['content'].errors['required']">Conteúdo é obrigatório</div>
+        <div *ngIf="f['content'].errors['minlength']">Mínimo de 10 caracteres</div>
+      </div>
+    </div>
+
+    <!-- Image URL -->
+    <div class="form-group">
+      <label for="imageUrl">URL da Imagem (opcional)</label>
+      <input
+        type="url"
+        id="imageUrl"
+        formControlName="imageUrl"
+        class="form-control"
+        placeholder="${APP_BASE_URL}"
+        (input)="onImageUrlChange($event)"
+      />
+      <small class="form-text">Cole o link de uma imagem para adicionar ao post</small>
+    </div>
+
+    <!-- Image Preview -->
+    <div class="image-preview" *ngIf="imagePreview">
+      <img [src]="imagePreview" alt="Preview" (error)="imagePreview = null" />
+    </div>
+
+    <!-- Error Message -->
+    <div class="error-message" *ngIf="errorMessage">
+      {{ errorMessage }}
+    </div>
+
+    <!-- Actions -->
+    <div class="form-actions">
+      <button
+        type="button"
+        class="btn btn-secondary"
+        (click)="resetForm()"
+        [disabled]="loading"
+      >
+        Cancelar
+      </button>
+      <button
+        type="submit"
+        class="btn btn-primary"
+        [disabled]="loading"
+      >
+        <span *ngIf="loading" class="spinner"></span>
+        {{ loading ? 'Publicando...' : 'Publicar' }}
+      </button>
+    </div>
+  </form>
+</div>

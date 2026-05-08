@@ -1,0 +1,102 @@
+<div class="register-container">
+  <div class="register-card">
+    <div class="logo-section">
+      <h1>BateraDev</h1>
+      <p>Crie sua conta</p>
+    </div>
+
+    <form [formGroup]="registerForm" (ngSubmit)="onSubmit()">
+      <div class="form-group">
+        <label for="username">Nome de usuário</label>
+        <input
+          type="text"
+          id="username"
+          formControlName="username"
+          class="form-control"
+          [class.is-invalid]="submitted && f['username'].errors"
+          placeholder="seunome"
+        />
+        <div class="invalid-feedback" *ngIf="submitted && f['username'].errors">
+          <div *ngIf="f['username'].errors['required']">Nome de usuário é obrigatório</div>
+          <div *ngIf="f['username'].errors['minlength']">Mínimo de 3 caracteres</div>
+          <div *ngIf="f['username'].errors['maxlength']">Máximo de 50 caracteres</div>
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label for="email">Email</label>
+        <input
+          type="email"
+          id="email"
+          formControlName="email"
+          class="form-control"
+          [class.is-invalid]="submitted && f['email'].errors"
+          placeholder="seu@email.com"
+        />
+        <div class="invalid-feedback" *ngIf="submitted && f['email'].errors">
+          <div *ngIf="f['email'].errors['required']">Email é obrigatório</div>
+          <div *ngIf="f['email'].errors['email']">Email inválido</div>
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label for="password">Senha</label>
+        <input
+          type="password"
+          id="password"
+          formControlName="password"
+          class="form-control"
+          [class.is-invalid]="submitted && f['password'].errors"
+          placeholder="Mínimo 6 caracteres"
+        />
+        <div class="invalid-feedback" *ngIf="submitted && f['password'].errors">
+          <div *ngIf="f['password'].errors['required']">Senha é obrigatória</div>
+          <div *ngIf="f['password'].errors['minlength']">Senha deve ter no mínimo 6 caracteres</div>
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label for="confirmPassword">Confirmar senha</label>
+        <input
+          type="password"
+          id="confirmPassword"
+          formControlName="confirmPassword"
+          class="form-control"
+          [class.is-invalid]="submitted && (f['confirmPassword'].errors || registerForm.errors?.['passwordMismatch'])"
+          placeholder="Digite a senha novamente"
+        />
+        <div class="invalid-feedback" *ngIf="submitted && f['confirmPassword'].errors">
+          <div *ngIf="f['confirmPassword'].errors['required']">Confirmação de senha é obrigatória</div>
+        </div>
+        <div class="invalid-feedback" *ngIf="submitted && registerForm.errors?.['passwordMismatch'] && !f['confirmPassword'].errors">
+          As senhas não coincidem
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label for="githubUsername">GitHub (opcional)</label>
+        <input
+          type="text"
+          id="githubUsername"
+          formControlName="githubUsername"
+          class="form-control"
+          placeholder="seu-usuario-github"
+        />
+        <small class="form-text">Conecte seu perfil GitHub para exibir seus projetos</small>
+      </div>
+
+      <div class="error-message" *ngIf="errorMessage">
+        {{ errorMessage }}
+      </div>
+
+      <button type="submit" class="btn btn-primary btn-block" [disabled]="loading">
+        <span *ngIf="loading" class="spinner"></span>
+        {{ loading ? 'Criando conta...' : 'Criar conta' }}
+      </button>
+    </form>
+
+    <div class="login-link">
+      <p>Já tem uma conta? <a (click)="goToLogin()">Entrar</a></p>
+    </div>
+  </div>
+</div>

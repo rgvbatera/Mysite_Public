@@ -1,0 +1,27 @@
+node_modules/
+npm-debug.log
+dist/
+.angular/
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+.DS_Store
+
+# Arquivos de documentação
+*.md
+!README.md
+
+# Backend (será versionado separadamente)
+backend/
+
+# Flutter App (será versionado separadamente ou em outro repo)
+bateradev_app/
+flutter_app/
+mobile_app/
+
+# Environment files
+.env
+.env.local
+.env.production

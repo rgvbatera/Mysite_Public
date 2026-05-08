@@ -1,0 +1,37 @@
+{
+  "name": "mysite",
+  "version": "0.0.1",
+  "private": true,
+  "engines": {
+    "node": "14.x || 16.x || 18.x || 20.x"
+  },
+  "scripts": {
+    "ng": "ng",
+    "start": "node server.js",
+    "dev": "ng serve",
+    "build": "ng build --configuration production --output-path=dist --aot --vendor-chunk=false",
+    "build:heroku": "NODE_OPTIONS=--max-old-space-size=2048 npm run build",
+    "build:ghpages": "ng build --configuration=production --output-path=dist && npx angular-cli-ghpages --dir=dist",
+    "test": "echo \"No tests configured\" && exit 0",
+    "heroku-postbuild": "npm run build:heroku"
+  },
+  "dependencies": {
+    "@angular/animations": "~13.3.0",
+    "@angular/common": "~13.3.0",
+    "@angular/compiler": "~13.3.0",
+    "@angular/core": "~13.3.0",
+    "@angular/forms": "~13.3.0",
+    "@angular/platform-browser": "~13.3.0",
+    "@angular/platform-browser-dynamic": "~13.3.0",
+    "@angular/router": "~13.3.0",
+    "@angular-devkit/build-angular": "~13.3.0",
+    "@angular/cli": "~13.3.0",
+    "@angular/compiler-cli": "~13.3.0",
+    "typescript": "~4.6.2",
+    "express": "^4.17.1",
+    "zone.js": "^0.11.8"
+  },
+  "devDependencies": {
+    "angular-cli-ghpages": "^0.6.0"
+  }
+}

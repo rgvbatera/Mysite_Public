@@ -1,0 +1,49 @@
+<div class="categoria-container">
+  <!-- Category Header -->
+  <section class="category-header">
+    <div class="container">
+      <div class="header-content">
+        <div class="category-icon-large">{{ categoryInfo.icon }}</div>
+        <h1>{{ categoryInfo.name }}</h1>
+        <p>{{ categoryInfo.description }}</p>
+        <div class="posts-count">
+          <span>{{ posts.length }} artigos encontrados</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Posts Grid -->
+  <section class="posts-section">
+    <div class="container">
+      <div class="posts-grid" *ngIf="posts.length > 0; else noPosts">
+        <article *ngFor="let post of posts" class="post-card">
+          <div class="post-image">
+            <img [src]="post.image" [alt]="post.title">
+            <span class="featured-badge" *ngIf="post.featured">⭐ Destaque</span>
+          </div>
+          <div class="post-content">
+            <h2>{{ post.title }}</h2>
+            <p class="post-description">{{ post.description }}</p>
+            <div class="post-meta">
+              <span class="author">✍️ {{ post.author }}</span>
+              <span class="date">📅 {{ post.date | date:'dd/MM/yyyy' }}</span>
+            </div>
+            <div class="post-tags">
+              <span *ngFor="let tag of post.tags" class="tag">{{ tag }}</span>
+            </div>
+          </div>
+        </article>
+      </div>
+
+      <ng-template #noPosts>
+        <div class="no-posts">
+          <div class="no-posts-icon">📭</div>
+          <h3>Nenhum artigo encontrado</h3>
+          <p>Ainda não temos artigos nesta categoria.</p>
+          <a routerLink="/" class="back-btn">Voltar para Home</a>
+        </div>
+      </ng-template>
+    </div>
+  </section>
+</div>

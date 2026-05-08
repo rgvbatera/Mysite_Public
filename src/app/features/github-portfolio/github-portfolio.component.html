@@ -1,0 +1,160 @@
+<div class="portfolio-container">
+  <!-- Profile Section -->
+  <div class="profile-section" *ngIf="profile && !loadingProfile">
+    <div class="profile-card">
+      <img [src]="profile.avatar_url" alt="Avatar" class="profile-avatar" />
+      <div class="profile-info">
+        <h1 class="profile-name">{{ profile.name || profile.login }}</h1>
+        <p class="profile-username">@{{ profile.login }}</p>
+        <p class="profile-bio" *ngIf="profile.bio">{{ profile.bio }}</p>
+        
+        <div class="profile-stats">
+          <div class="stat">
+            <span class="stat-value">{{ profile.public_repos }}</span>
+            <span class="stat-label">Repositórios</span>
+          </div>
+          <div class="stat">
+            <span class="stat-value">{{ profile.followers }}</span>
+            <span class="stat-label">Seguidores</span>
+          </div>
+          <div class="stat">
+            <span class="stat-value">{{ profile.following }}</span>
+            <span class="stat-label">Seguindo</span>
+          </div>
+        </div>
+
+        <button class="btn-profile" (click)="openProfile()">
+          <span class="icon">🔗</span>
+          Ver no GitHub
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Loading Profile -->
+  <div class="loading-section" *ngIf="loadingProfile">
+    <div class="spinner-large"></div>
+    <p>Carregando perfil...</p>
+  </div>
+
+  <!-- Controls -->
+  <div class="controls-section">
+    <div class="search-box">
+      <input
+        type="text"
+        [(ngModel)]="searchTerm"
+        (input)="onSearchChange()"
+        placeholder="🔍 Buscar repositórios..."
+        class="search-input"
+      />
+    </div>
+
+    <div class="filters">
+      <div class="sort-buttons">
+        <button
+          class="sort-btn"
+          [class.active]="sortBy === 'updated'"
+          (click)="onSortChange('updated')"
+        >
+          🕐 Recentes
+        </button>
+        <button
+          class="sort-btn"
+          [class.active]="sortBy === 'stars'"
+          (click)="onSortChange('stars')"
+        >
+          ⭐ Stars
+        </button>
+        <button
+          class="sort-btn"
+          [class.active]="sortBy === 'name'"
+          (click)="onSortChange('name')"
+        >
+          🔤 Nome
+        </button>
+      </div>
+
+      <div class="language-filter">
+        <button
+          class="lang-btn"
+          [class.active]="filterLanguage === null"
+          (click)="onLanguageFilter(null)"
+        >
+          Todas
+        </button>
+        <button
+          *ngFor="let lang of languages"
+          class="lang-btn"
+          [class.active]="filterLanguage === lang"
+          (click)="onLanguageFilter(lang)"
+        >
+          <span
+            class="lang-dot"
+            [style.background-color]="getLanguageColor(lang)"
+          ></span>
+          {{ lang }}
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Error Message -->
+  <div class="error-banner" *ngIf="error">
+    {{ error }}
+  </div>
+
+  <!-- Loading Repos -->
+  <div class="loading-section" *ngIf="loading && !error">
+    <div class="spinner-large"></div>
+    <p>Carregando repositórios...</p>
+  </div>
+
+  <!-- Repositories Grid -->
+  <div class="repos-grid" *ngIf="!loading">
+    <div
+      *ngFor="let repo of filteredRepos"
+      class="repo-card"
+      (click)="openRepo(repo.html_url)"
+    >
+      <div class="repo-header">
+        <h3 class="repo-name">{{ repo.name }}</h3>
+        <span class="repo-visibility" [class.public]="!repo.private">
+          {{ repo.private ? '🔒 Private' : '🌐 Public' }}
+        </span>
+      </div>
+
+      <p class="repo-description" *ngIf="repo.description">
+        {{ repo.description }}
+      </p>
+
+      <div class="repo-stats">
+        <div class="stat-item" *ngIf="repo.language">
+          <span
+            class="lang-dot"
+            [style.background-color]="getLanguageColor(repo.language)"
+          ></span>
+          {{ repo.language }}
+        </div>
+        <div class="stat-item" *ngIf="repo.stargazers_count > 0">
+          ⭐ {{ formatNumber(repo.stargazers_count) }}
+        </div>
+        <div class="stat-item" *ngIf="repo.forks_count > 0">
+          🔀 {{ formatNumber(repo.forks_count) }}
+        </div>
+      </div>
+
+      <div class="repo-footer">
+        <span class="repo-updated">
+          Atualizado em {{ formatDate(repo.updated_at) }}
+        </span>
+      </div>
+    </div>
+
+    <!-- Empty State -->
+    <div class="empty-state" *ngIf="filteredRepos.length === 0 && !loading">
+      <div class="empty-icon">📂</div>
+      <h3>Nenhum repositório encontrado</h3>
+      <p>Tente ajustar os filtros ou buscar por outro termo</p>
+    </div>
+  </div>
+</div>
