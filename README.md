@@ -16,6 +16,16 @@ BateraDev is an Angular web application with a terminal/matrix-inspired visual s
 
 Some features depend on an external backend. In this public repository, sensitive endpoints, credentials, and private implementation details were removed or replaced with safe example values.
 
+## Screenshots
+
+| Home | Articles |
+| --- | --- |
+| ![BateraDev home page with matrix-inspired background and category cards](prints/2026-05-13_225918.png) | ![BateraDev articles page with category filters and article cards](prints/2026-05-13_230002.png) |
+
+| Explore section |
+| --- |
+| ![BateraDev explore section with GitHub and articles links](prints/2026-05-13_230209.png) |
+
 ## Tech Stack
 
 - Angular 13
